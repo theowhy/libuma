@@ -22,6 +22,12 @@ add_library(uma SHARED
 
 	include/libuma/init.h
 	src/init.c
+
+	# Device
+	include/libuma/device/type.h
+	include/libuma/device/internal.h
+	include/libuma/device/handler.h
+	src/device/handler.c
 )
 
 target_link_libraries(uma ${LIBUSB_LIBRARIES})
