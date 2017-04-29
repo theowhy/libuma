@@ -1,7 +1,12 @@
-#include <libuma/command/type.h>
-
 #ifndef UMA_COMMAND_UTILS_H
 #define UMA_COMMAND_UTILS_H
+
+#include <libuma/command/type.h>
+#include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 /*!
  * \brief Get command string name representation for the the given command_id
@@ -15,13 +20,19 @@
  * \return  The name (see name field of \ref uma_command_info structure) if the command is found.\n
  * Otherwise, NULL is returned
  */
-char* moopass_command_name_get_from_id(uma_command_info* commands, size_t command_count, uint8_t raw_command_id);
+int moopass_command_name_get(char const ** name, uint8_t command_id);
 
 /*!
  * \brief Get command ID from the given string name
  *
  * \return Nothing. This functions is not yet implemented
  */
-int moopass_command_id_get_from_name();
+int moopass_command_id_get_from_name(char const * const name, uint8_t *command_id);
+int moopass_command_get_from_id(uint8_t command_id, uma_command_info **command_info);
+int moopass_command_get_from_name(char const * const name, uma_command_info **command_info);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif //UMA_COMMAND_UTILS_H
