@@ -67,6 +67,11 @@ static int parse_callback(int key, char *arg, struct argp_state *state) {
 		case 'd':
 			configuration->data = arg;
 			break;
+		case 'l':
+			printf("Available commands:\n");
+			command_list_print(stdout, "\t- ");
+			exit(0);
+			break;
 		case 'v':
 			configuration->verbose = true;
 			break;
@@ -88,6 +93,7 @@ static char args_documentation[] = "";
 static struct argp_option options[] = {
 	{"send", 's', "COMMAND_ID", 0, "Send message to mooltipass"},
 	{"read", 'r', NULL, 0, "Read message from mooltipass"},
+	{"list-commands", 'l', 0, 0, "List available commands"},
 	{"data", 'd', "VALUE", 0, "Data to use"},
 	{"command", 'c', "COMMAND", 0, "Send a command to mooltipass"},
 	{"mooltipass", 'm', "ID", 0, "Index of the mooltipass to use (default is the first device which index is 0)"},
