@@ -55,3 +55,12 @@ int moopass_command_get_from_name(char const * const name, uma_command_info **co
 	}
 	return 1;
 }
+
+void command_list_print(FILE *output, char const * prefix) {
+	uma_command_info *command_info;
+
+	for(size_t i = 0; i < uma_command_original_size; i++) {
+		command_info = &(uma_command_original[i]);
+		fprintf(output, "%s%s: %s\n", prefix, command_info->name, command_info->description);
+	}
+}

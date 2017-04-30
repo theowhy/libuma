@@ -3,6 +3,7 @@
 
 #include <libuma/command/type.h>
 #include <stdint.h>
+#include <stdio.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -30,6 +31,7 @@ int moopass_command_name_get(char const ** name, uint8_t command_id);
 int moopass_command_id_get_from_name(char const * const name, uint8_t *command_id);
 int moopass_command_get_from_id(uint8_t command_id, uma_command_info **command_info);
 int moopass_command_get_from_name(char const * const name, uma_command_info **command_info);
+void command_list_print(FILE *output, char const *prefix);
 
 #ifdef __cplusplus
 }
