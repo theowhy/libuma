@@ -2,6 +2,7 @@
 #include <libuma/init.h>
 #include <libuma/usb/sync.h>
 #include <libuma/device/handler.h>
+#include <libuma/command/utils.h>
 #include <argp.h>
 #include <stdbool.h>
 #include <string.h>
@@ -9,6 +10,7 @@
 enum mode {
 	SEND = 1,
 	READ,
+	COMMAND,
 };
 
 typedef struct configuration {
@@ -36,6 +38,16 @@ static int parse_callback(int key, char *arg, struct argp_state *state) {
 			break;
 		case 'r':
 			configuration->mode = READ;
+			break;
+
+		// Command handling
+		case 'c':
+			configuration->mode = SEND;
+
+			if(moopass_command_id_get_from_name(arg, &configuration->command_id) != 0) {
+				printf("Unknown command '%s'\n", arg);
+				exit(2);
+			}
 			break;
 
 		// Common option handling
@@ -77,6 +89,7 @@ static struct argp_option options[] = {
 	{"send", 's', "COMMAND_ID", 0, "Send message to mooltipass"},
 	{"read", 'r', NULL, 0, "Read message from mooltipass"},
 	{"data", 'd', "VALUE", 0, "Data to use"},
+	{"command", 'c', "COMMAND", 0, "Send a command to mooltipass"},
 	{"mooltipass", 'm', "ID", 0, "Index of the mooltipass to use (default is the first device which index is 0)"},
 	{"verbose", 'v', NULL, 0,  "Produce verbose output" },
 	{NULL, 0, 0, 0, NULL}
