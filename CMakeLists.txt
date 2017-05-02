@@ -56,3 +56,15 @@ validate_cppcheck(mooltipass_list)
 install(TARGETS mooltipass_list
 	DESTINATION bin
 )
+
+add_executable(mooltipass_cmd
+	tools/cmd/main.c
+)
+
+target_link_libraries(mooltipass_cmd uma)
+validate_style(mooltipass_cmd)
+validate_cppcheck(mooltipass_cmd)
+
+install(TARGETS mooltipass_cmd
+	DESTINATION bin
+)
