@@ -140,7 +140,7 @@ int main(int argc, char **argv) {
 			request.message_id = configuration.command_id;
 
 			if(configuration.data != NULL) {
-				request.data_size = strlen(configuration.data) + 1;
+				request.data_size = strlen(configuration.data);
 				memcpy(request.data, configuration.data, request.data_size);
 				request.data[request.data_size] = '\0';
 			}
