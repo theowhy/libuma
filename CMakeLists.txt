@@ -19,6 +19,9 @@ add_library(uma SHARED
 
 	# base system
 	src/retcode.c
+
+	include/libuma/init.h
+	src/init.c
 )
 
 target_link_libraries(uma ${LIBUSB_LIBRARIES})
