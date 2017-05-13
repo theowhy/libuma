@@ -10,6 +10,10 @@ include(cppcheck)
 
 include_directories(include ${LIBUSB_INCLUDE_DIR})
 
+add_custom_target(readme
+	SOURCES readme.md
+)
+
 add_library(uma SHARED
 	include/libuma/retcode.h
 	include/libuma/usb/device_info.h
