@@ -7,6 +7,25 @@ find_package(libusb REQUIRED)
 
 include(style)
 include(cppcheck)
+include(cflags)
+
+# Set C standard level
+add_cflag("-std=c99")
+
+# Set default Warnings
+add_cflag_if_supported("-Wall")
+add_cflag_if_supported("-Wextra")
+add_cflag_if_supported("-Wshadow")
+add_cflag_if_supported("-fstrict-aliasing")
+add_cflag_if_supported("-Wformat")
+add_cflag_if_supported("-Wformat-security")
+add_cflag_if_supported("-Wmaybe-uninitialized")
+add_cflag_if_supported("-Wmissing-variable-declarations")
+add_cflag_if_supported("-Wshorten-64-to-32")
+add_cflag_if_supported("-Wimplicit-function-declaration")
+add_cflag_if_supported("-Wredundant-decls")
+add_cflag_if_supported("-Wno-missing-field-initializers")
+add_cflag_if_supported("-Wundef")
 
 include_directories(include ${LIBUSB_INCLUDE_DIR})
 
