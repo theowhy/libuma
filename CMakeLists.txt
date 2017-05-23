@@ -7,6 +7,7 @@ find_package(libusb REQUIRED)
 
 include(style)
 include(cppcheck)
+include(doxygen)
 include(cflags)
 
 # Set C standard level
@@ -71,6 +72,7 @@ add_library(uma SHARED
 target_link_libraries(uma ${LIBUSB_LIBRARIES})
 validate_style(uma)
 validate_cppcheck(uma)
+add_documentation(uma)
 
 add_executable(mooltipass_list
 	tools/list/main.c
