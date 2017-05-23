@@ -57,6 +57,14 @@ add_library(uma SHARED
 
 	src/usb/message.c
 
+	# Commands
+	include/libuma/command/type.h
+	include/libuma/command/original.h
+	include/libuma/command/utils.h
+
+	src/command/utils.c
+	src/command/original.c
+
 	# base system
 	src/retcode.c
 
