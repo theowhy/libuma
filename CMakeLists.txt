@@ -3,7 +3,6 @@ cmake_minimum_required(VERSION 3.0)
 project(libuma)
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
-find_package(libusb REQUIRED)
 
 include(style)
 include(cppcheck)
@@ -36,6 +35,13 @@ add_cflag_if_supported("-Wundef")
 if(FORTIFY)
 	add_cflag_if_supported("-D_FORTIFY_SOURCE=${FORTIFY}")
 endif()
+
+find_package(libusb 1.0 REQUIRED)
+set_package_properties(libusb PROPERTIES
+	DESCRIPTION "A cross-platform user library to access USB devices"
+	URL "http://libusb.info/"
+	PURPOSE "USB communication with mooltipass"
+)
 
 include_directories(include ${LIBUSB_INCLUDE_DIR})
 
