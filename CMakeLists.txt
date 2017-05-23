@@ -12,6 +12,9 @@ include(cflags)
 # Set C standard level
 add_cflag("-std=c99")
 
+# Set FORITY cmake variable
+set(FORTIFY ${FORTIFY} CACHE STRING "Set fortify source level. This can only be use with -O greater than 1. The value can be Empty to disable it, 1 for safe hardening and 2 for strongest hardening")
+
 # Set default Warnings
 add_cflag_if_supported("-Wall")
 add_cflag_if_supported("-Wextra")
@@ -26,6 +29,11 @@ add_cflag_if_supported("-Wimplicit-function-declaration")
 add_cflag_if_supported("-Wredundant-decls")
 add_cflag_if_supported("-Wno-missing-field-initializers")
 add_cflag_if_supported("-Wundef")
+
+# Basic compilation hardening
+if(FORTIFY)
+	add_cflag_if_supported("-D_FORTIFY_SOURCE=${FORTIFY}")
+endif()
 
 include_directories(include ${LIBUSB_INCLUDE_DIR})
 
