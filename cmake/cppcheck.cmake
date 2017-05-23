@@ -1,5 +1,16 @@
+include(FeatureSummary)
+get_property(PKG_TYPES GLOBAL PROPERTY FeatureSummary_PKG_TYPES)
+list(FIND PKG_TYPES "BUILD" BUILD_INDEX )
+if(${BUILD_INDEX} EQUAL -1)
+	set_property(GLOBAL APPEND PROPERTY FeatureSummary_PKG_TYPES BUILD)
+endif()
 find_package(cppcheck)
-mark_as_advanced(CPPCHECK_BIN)
+set_package_properties(cppcheck PROPERTIES
+	DESCRIPTION "A tool for static C/C++ code analysis"
+	URL "http://cppcheck.sourceforge.net/"
+	TYPE BUILD
+	PURPOSE "Code analysis and error reporting"
+)
 
 option(CPPCHECK_VALIDATE_CONFIG "Have cppcheck check the configuration" OFF)
 option(CPPCHECK_VALIDATE_LIBRARY "Have cppcheck check the library configuration" OFF)
