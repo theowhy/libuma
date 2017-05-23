@@ -7,6 +7,7 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 include(style)
 include(cppcheck)
 include(doxygen)
+include(FeatureSummary)
 include(cflags)
 
 # Set C standard level
@@ -102,4 +103,8 @@ validate_cppcheck(mooltipass_cmd)
 
 install(TARGETS mooltipass_cmd
 	DESTINATION bin
+)
+
+feature_summary(
+	WHAT ALL
 )
