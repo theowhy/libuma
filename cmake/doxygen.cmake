@@ -1,6 +1,7 @@
 find_package(Doxygen)
 if(NOT DOXYGEN_GENERIC_DOXYFILE)
 	set(DOXYGEN_GENERIC_DOXYFILE ${CMAKE_SOURCE_DIR}/doc/Doxyfile CACHE FILEPATH "Doxygen default doxyfile")
+	mark_as_advanced(DOXYGEN_GENERIC_DOXYFILE)
 endif()
 
 if(NOT TARGET doc)
