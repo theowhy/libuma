@@ -1,4 +1,17 @@
+include(FeatureSummary)
+get_property(PKG_TYPES GLOBAL PROPERTY FeatureSummary_PKG_TYPES)
+list(FIND PKG_TYPES "BUILD" BUILD_INDEX )
+if(${BUILD_INDEX} EQUAL -1)
+	set_property(GLOBAL APPEND PROPERTY FeatureSummary_PKG_TYPES BUILD)
+endif()
 find_package(Doxygen)
+set_package_properties(Doxygen PROPERTIES
+	DESCRIPTION "Source code documentation generator"
+	URL "http://doxygen.org"
+	TYPE BUILD
+	PURPOSE "Generate source code documentation"
+)
+
 if(NOT DOXYGEN_GENERIC_DOXYFILE)
 	set(DOXYGEN_GENERIC_DOXYFILE ${CMAKE_SOURCE_DIR}/doc/Doxyfile CACHE FILEPATH "Doxygen default doxyfile")
 	mark_as_advanced(DOXYGEN_GENERIC_DOXYFILE)
