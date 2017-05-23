@@ -10,10 +10,11 @@ include(cppcheck)
 include(cflags)
 
 # Set C standard level
-add_cflag("-std=c99")
+add_cflag("-std=c11")
 
 # Set FORITY cmake variable
 set(FORTIFY ${FORTIFY} CACHE STRING "Set fortify source level. This can only be use with -O greater than 1. The value can be Empty to disable it, 1 for safe hardening and 2 for strongest hardening")
+
 
 # Set default Warnings
 add_cflag_if_supported("-Wall")
@@ -70,7 +71,6 @@ add_library(uma SHARED
 target_link_libraries(uma ${LIBUSB_LIBRARIES})
 validate_style(uma)
 validate_cppcheck(uma)
-
 
 add_executable(mooltipass_list
 	tools/list/main.c
