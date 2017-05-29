@@ -177,8 +177,8 @@ void uma_device_info_print(uma_Mooltipass mooltipass) {
 	}
 	printf("Number of possible configurations: %d\n", desc.bNumConfigurations);
 	printf("Device Class: %d\n", (int)desc.bDeviceClass);
-	printf("VendorID: %d\n", desc.idVendor);
-	printf("ProductID: %d\n", desc.idProduct);
+	printf("VendorID:  0x%.4x\n", desc.idVendor);
+	printf("ProductID: 0x%.4x\n", desc.idProduct);
 
 	libusb_get_config_descriptor(mooltipass->usb_device, 0, &config);
 
