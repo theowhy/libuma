@@ -8,13 +8,12 @@
 extern "C" {
 #endif
 
-/*!
- * \brief Description of a command
- */
 typedef struct uma_command_info {
 	uint8_t id; ///< ID of the command
 	const char *name; ///< Human readable mapping of the command's ID
 	const char *description; ///< Human readable description of the command
+	const char *request;
+	const char *response;
 } uma_command_info;
 
 #ifdef __cplusplus
