@@ -3,7 +3,7 @@
 
 uma_ret_code uma_init() {
 	if(libusb_init(NULL) != LIBUSB_SUCCESS) {
-		return UMA_SUCCESS;
+		return UMA_ERROR_USB_INIT;
 	}
 	return UMA_SUCCESS;
 }
