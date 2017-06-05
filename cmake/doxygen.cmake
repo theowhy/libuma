@@ -26,6 +26,7 @@ function(add_documentation TARGET)
 	set(oneValueArgs
 		DOXYFILE #Doxygen doxyfile
 		PROJECT_NAME # Set project name for documentation. Default: ${PROJECT_NAME}
+		MAIN_PAGE # Set project documentation main page
 	)
 	set(multiValueArgs)
 	cmake_parse_arguments(ARG "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
@@ -42,6 +43,11 @@ function(add_documentation TARGET)
 		else()
 			set(DOXYGEN_PROJECT_NAME ${PROJECT_NAME})
 		endif()
+
+		if(ARG_MAIN_PAGE)
+			set(DOXYGEN_MAIN_PAGE ${ARG_MAIN_PAGE})
+		endif()
+
 		# Generate source file with full path
 		get_target_property(TARGET_SOURCE_FILES ${TARGET} SOURCES)
 		foreach(SOURCE_FILE ${TARGET_SOURCE_FILES})

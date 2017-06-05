@@ -124,7 +124,8 @@ WARN_LOGFILE           =
 # Configuration options related to the input files
 #-------------------------------------------------
 
-INPUT                  = @DOXYGEN_PROJECT_SOURCES@
+INPUT                  = @DOXYGEN_MAIN_PAGE@ @DOXYGEN_PROJECT_SOURCES@
+USE_MDFILE_AS_MAINPAGE = @DOXYGEN_MAIN_PAGE@
 INPUT_ENCODING         = UTF-8
 FILE_PATTERNS          = *.c \
                          *.cc \
