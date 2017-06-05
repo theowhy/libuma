@@ -16,6 +16,7 @@ typedef struct uma_usb_message {
 } __attribute__((__packed__)) uma_usb_message;
 
 void uma_usb_message_dump(uma_usb_message *message);
+void uma_usb_message_hexadump(uma_usb_message *message, unsigned int page_size);
 
 #ifdef __cplusplus
 }
