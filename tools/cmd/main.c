@@ -82,37 +82,6 @@ static struct argp_option options[] = {
 	{NULL, 0, 0, 0, NULL}
 };
 
-void message_print(uma_usb_message *message) {
-	int page_size = 10;
-	char tmp[page_size + 1];
-
-	tmp[page_size + 1] = 0;
-	printf("0x%x.\nData (%d):\n", message->message_id, message->data_size);
-
-	for(size_t i = 0; i < message->data_size; i++) {
-		printf("%.2x", message->data[i]);
-
-		if(isprint(message->data[i])) {
-			tmp[i % page_size] = message->data[i];
-		} else {
-			tmp[i % page_size] = '.';
-		}
-		printf(" ");
-
-		if(i == message->data_size - 1) {
-			while(i % page_size != page_size - 1) {
-				printf(".. ");
-				tmp[i % page_size] = '.';
-				i++;
-			}
-		}
-
-		if(i % 10 == 9) {
-			printf("| %s\n", tmp);
-		}
-	}
-}
-
 int main(int argc, char **argv) {
 	uma_ret_code result;
 	Configuration configuration = {0};
