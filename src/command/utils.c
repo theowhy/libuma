@@ -56,11 +56,28 @@ int moopass_command_get_from_name(char const * const name, uma_command_info **co
 	return 1;
 }
 
-void command_list_print(FILE *output, char const * prefix) {
+void command_list_print(FILE *output, size_t level, bool request_response_print, char const * prefix) {
 	uma_command_info *command_info;
+	const char indent[] = "\t";
 
 	for(size_t i = 0; i < uma_command_original_size; i++) {
 		command_info = &(uma_command_original[i]);
+
+		for(size_t level_count = 0; level_count < level; level_count++) {
+			fprintf(output, "%s", indent);
+		}
 		fprintf(output, "%s%s: %s\n", prefix, command_info->name, command_info->description);
+
+		if(request_response_print) {
+			for(size_t level_count = 0; level_count < level + 1; level_count++) {
+				fprintf(output, "%s", indent);
+			}
+			fprintf(output, "Request: %s\n", command_info->request);
+
+			for(size_t level_count = 0; level_count < level + 1; level_count++) {
+				fprintf(output, "%s", indent);
+			}
+			fprintf(output, "Response: %s\n", command_info->response);
+		}
 	}
 }

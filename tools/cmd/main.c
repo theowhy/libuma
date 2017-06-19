@@ -15,6 +15,7 @@ enum mode {
 
 typedef struct configuration {
 	bool verbose;
+	bool command_print;
 	size_t device_index;
 	enum mode mode;
 	uint8_t command_id;
@@ -68,9 +69,7 @@ static int parse_callback(int key, char *arg, struct argp_state *state) {
 			configuration->data = arg;
 			break;
 		case 'l':
-			printf("Available commands:\n");
-			command_list_print(stdout, "\t- ");
-			exit(0);
+			configuration->command_print = true;
 			break;
 		case 'v':
 			configuration->verbose = true;
@@ -91,14 +90,14 @@ static char program_description[] =
 static char args_documentation[] = "";
 
 static struct argp_option options[] = {
-	{"send", 's', "COMMAND_ID", 0, "Send message to mooltipass"},
-	{"read", 'r', NULL, 0, "Read message from mooltipass"},
-	{"list-commands", 'l', 0, 0, "List available commands"},
-	{"data", 'd', "VALUE", 0, "Data to use"},
-	{"command", 'c', "COMMAND", 0, "Send a command to mooltipass"},
-	{"mooltipass", 'm', "ID", 0, "Index of the mooltipass to use (default is the first device which index is 0)"},
-	{"verbose", 'v', NULL, 0,  "Produce verbose output" },
-	{NULL, 0, 0, 0, NULL}
+	{"send", 's', "COMMAND_ID", 0, "Send message to mooltipass", 2},
+	{"read", 'r', NULL, 0, "Read message from mooltipass", 2},
+	{"list-commands", 'l', 0, 0, "List available commands", 2},
+	{"data", 'd', "VALUE", 0, "Data to use", 2},
+	{"command", 'c', "COMMAND", 0, "Send a command to mooltipass", 2},
+	{"mooltipass", 'm', "ID", 0, "Index of the mooltipass to use (default is the first device which index is 0)", 1},
+	{"verbose", 'v', NULL, 0,  "Produce verbose output", 1},
+	{NULL, 0, 0, 0, NULL, 0}
 };
 
 int main(int argc, char **argv) {
@@ -109,6 +108,13 @@ int main(int argc, char **argv) {
 
 	if(argp_parse(&argp, argc, argv, 0, NULL, &configuration) != 0) {
 		return 1;
+	}
+
+	if(configuration.command_print) {
+		printf("Available commands:\n");
+		command_list_print(stdout, 1, configuration.verbose, "- ");
+
+		return 0;
 	}
 	uma_init();
 	result = uma_device_open_idx(&mooltipass, configuration.device_index);
@@ -139,7 +145,7 @@ int main(int argc, char **argv) {
 		}
 		case READ:
 		{
-			uma_usb_message response = {0};
+			uma_usb_message response = {0, 0, {0}};
 			uma_usb_sync_read(mooltipass, &response);
 
 			uma_usb_message_dump(&response);
