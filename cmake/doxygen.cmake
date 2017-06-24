@@ -31,6 +31,7 @@ function(add_documentation TARGET)
 	)
 	set(multiValueArgs
 		IMAGE_FOLDERS # Set the folders where images can be found
+		DOXYGEN_EXT_PAGES # Set the extended markdown pages to include in documentation
 	)
 	cmake_parse_arguments(ARG "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
@@ -58,6 +59,10 @@ function(add_documentation TARGET)
 			set(DOXYGEN_MAIN_PAGE ${ARG_MAIN_PAGE})
 		endif()
 
+		if(ARG_DOXYGEN_EXT_PAGES)
+			set(DOXYGEN_EXT_PAGES ${ARG_DOXYGEN_EXT_PAGES})
+		endif()
+
 		# Define image folders
 		if(ARG_IMAGE_FOLDERS)
 			foreach(IMAGE_FOLDER ${ARG_IMAGE_FOLDERS})
@@ -70,6 +75,9 @@ function(add_documentation TARGET)
 		foreach(SOURCE_FILE ${TARGET_SOURCE_FILES})
 			set(SOURCE_FILES "${SOURCE_FILES} ${CMAKE_CURRENT_SOURCE_DIR}/${SOURCE_FILE}")
 		endforeach()
+		foreach(EXT_FILE ${DOXYGEN_EXT_PAGES})
+			set(SOURCE_FILES "${SOURCE_FILES} ${EXT_FILE}")
+		endforeach()
 		set(SOURCE_BASE_PATH ${CMAKE_CURRENT_SOURCE_DIR})
 		set(DOXYGEN_PROJECT_SOURCES ${SOURCE_FILES})
 
@@ -81,7 +89,7 @@ function(add_documentation TARGET)
 		add_custom_target(doc-${TARGET}
 			COMMAND ${DOXYGEN_EXECUTABLE} ${OUTPUT_DOXYFILE}
 			COMMENT "Generating documentation for ${TARGET}"
-			SOURCES ${DOXYGEN_MAIN_PAGE}
+			SOURCES ${DOXYGEN_MAIN_PAGE} ${DOXYGEN_EXT_PAGES}
 		)
 
 		add_dependencies(doc doc-${TARGET})
