@@ -26,6 +26,7 @@ function(add_documentation TARGET)
 	set(oneValueArgs
 		DOXYFILE #Doxygen doxyfile
 		PROJECT_NAME # Set project name for documentation. Default: ${PROJECT_NAME}
+		PROJECT_VERSION # Set the documented project's version. Default: ${PROJECT_VERSION}
 		MAIN_PAGE # Set project documentation main page
 	)
 	set(multiValueArgs)
@@ -42,6 +43,13 @@ function(add_documentation TARGET)
 			set(DOXYGEN_PROJECT_NAME ${ARG_PROJECT_NAME})
 		else()
 			set(DOXYGEN_PROJECT_NAME ${PROJECT_NAME})
+		endif()
+
+		# Define version
+		if(ARG_PROJECT_VERSION)
+			set(DOXYGEN_PROJECT_VERSION ${PROJECT_VERSION})
+		else()
+			set(DOXYGEN_PROJECT_VERSION ${PROJECT_VERSION})
 		endif()
 
 		if(ARG_MAIN_PAGE)
