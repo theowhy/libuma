@@ -29,7 +29,9 @@ function(add_documentation TARGET)
 		PROJECT_VERSION # Set the documented project's version. Default: ${PROJECT_VERSION}
 		MAIN_PAGE # Set project documentation main page
 	)
-	set(multiValueArgs)
+	set(multiValueArgs
+		IMAGE_FOLDERS # Set the folders where images can be found
+	)
 	cmake_parse_arguments(ARG "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
 	if(DOXYGEN_FOUND)
@@ -54,6 +56,13 @@ function(add_documentation TARGET)
 
 		if(ARG_MAIN_PAGE)
 			set(DOXYGEN_MAIN_PAGE ${ARG_MAIN_PAGE})
+		endif()
+
+		# Define image folders
+		if(ARG_IMAGE_FOLDERS)
+			foreach(IMAGE_FOLDER ${ARG_IMAGE_FOLDERS})
+				set(DOXYGEN_IMAGE_FOLDERS "${DOXYGEN_IMAGE_FOLDERS} ${IMAGE_FOLDER}")
+			endforeach()
 		endif()
 
 		# Generate source file with full path
