@@ -101,6 +101,8 @@ validate_cppcheck(uma)
 add_documentation(uma
 	MAIN_PAGE ${CMAKE_CURRENT_SOURCE_DIR}/doc/index.md
 	IMAGE_FOLDERS ${CMAKE_CURRENT_SOURCE_DIR}/doc/diags
+	DOXYGEN_EXT_PAGES
+		${CMAKE_CURRENT_SOURCE_DIR}/doc/build.md
 )
 
 add_executable(mooltipass_list
