@@ -32,10 +32,21 @@ add_cflag_if_supported("-Wredundant-decls")
 add_cflag_if_supported("-Wno-missing-field-initializers")
 add_cflag_if_supported("-Wundef")
 
-# Basic compilation hardening
+# Set default optimizations
+add_cflag_if_supported("-flto")
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,--no-add-needed -Wl,--as-needed -Wl,--no-undefined")
+set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} -Wl,--no-add-needed -Wl,--as-needed")
+set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--no-add-needed -Wl,--as-needed")
+
+# Basic hardening
 if(FORTIFY)
 	add_cflag_if_supported("-D_FORTIFY_SOURCE=${FORTIFY}")
 endif()
+add_cflag_if_supported("-fstack-protector-strong")
+add_cflag_if_supported("-fpic")
+add_cflag_if_supported("-Wstrictoverflow")
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-z,relro -Wl,-z,now")
+set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} -Wl,-z,relro -Wl,-z,now")
 
 find_package(libusb 1.0 REQUIRED)
 set_package_properties(libusb PROPERTIES
