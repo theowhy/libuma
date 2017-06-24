@@ -98,7 +98,7 @@ add_library(uma SHARED
 target_link_libraries(uma ${LIBUSB_LIBRARIES})
 validate_style(uma)
 validate_cppcheck(uma)
-add_documentation(uma)
+add_documentation(uma MAIN_PAGE ${CMAKE_CURRENT_SOURCE_DIR}/doc/index.md)
 
 add_executable(mooltipass_list
 	tools/list/main.c
