@@ -81,6 +81,7 @@ function(add_documentation TARGET)
 		add_custom_target(doc-${TARGET}
 			COMMAND ${DOXYGEN_EXECUTABLE} ${OUTPUT_DOXYFILE}
 			COMMENT "Generating documentation for ${TARGET}"
+			SOURCES ${DOXYGEN_MAIN_PAGE}
 		)
 
 		add_dependencies(doc doc-${TARGET})
