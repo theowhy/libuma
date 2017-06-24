@@ -1,65 +1,367 @@
 #include <libuma/command/original.h>
 
 uma_command_info uma_command_original[] = {
-	{0xA1, "PING", "Send a 4 bytes payload to mooltipass and it will echo it back"},
-	{0xA2, "VERSION_GET", "Retrieve mooltipass firmware version"},
-	{0xA3, "CONTEXT_SET", ""},
-	{0xA4, "LOGIN_GET", ""},
-	{0xA5, "PASSWORD_GET", ""},
-	{0xA6, "LOGIN_SET", ""},
-	{0xA7, "PASSWORD_SET", ""},
-	{0xA8, "CHECK_PASSWORD", ""},
-	{0xA9, "CONTEXT_ADD", ""},
-	{0xAA, "BOOTLOADER_PWD_SET", ""},
-	{0xAB, "JUMP_TO_BOOTLOADER", ""},
-	{0xAC, "RANDOM_NUMBER_GET", ""},
-	{0xAD, "MEMORYMGMT_ENTER", ""},
-	{0xAE, "IMPORT_MEDIA_START", ""},
-	{0xAF, "IMPORT_MEDIA", ""},
-	{0xB0, "IMPORT_MEDIA_END", ""},
-	{0xB1, "MOOLTIPASS_PARM_SET", ""},
-	{0xB2, "MOOLTIPASS_PARM_GET", ""},
-	{0xB3, "CARD_RESET", ""},
-	{0xB4, "READ_CARD_CREDS", ""},
-	{0xB5, "RESERVED", ""},
-	{0xB6, "CARD_LOGIN_SET", ""},
-	{0xB7, "CARD_PASS_SET", ""},
-	{0xB8, "UNKNOWN_CARD_ADD", ""},
-	{0xB9, "STATUS_GET", ""},
-	{0xBA, "FUNCTIONAL_TEST_RES", ""},
-	{0xBB, "DATE_SET", ""},
-	{0xBC, "UID_SET", ""},
-	{0xBD, "UID_GET", ""},
-	{0xBE, "DATA_SERVICE_SET", ""},
-	{0xBF, "DATA_SERVICE_ADD", ""},
-	{0xC0, "WRITE_32B_IN_DN", ""},
-	{0xC1, "READ_32B_IN_DN", ""},
-	{0xC2, "CUR_CARD_CPZ_GET", ""},
-	{0xC3, "REQUEST_CANCEL", ""},
-	{0xC4, "PLEASE_RETRY", ""},
-	{0xC5, "FLASH_NODE_READ", ""},
-	{0xC6, "FLASH_NODE_WRITE", ""},
-	{0xC7, "FAVORITE_GET", ""},
-	{0xC8, "FAVORITE_SET", ""},
-	{0xC9, "STARTING_PARENT_GET", ""},
-	{0xCA, "STARTING_PARENT_SET", ""},
-	{0xCB, "CTRVALUE_GET", ""},
-	{0xCC, "CTRVALUE_SET", ""},
-	{0xCD, "CARD_CPZ_CTR_ADD", ""},
-	{0xCE, "CARD_CPZ_CTR_GET", ""},
-	{0xCF, "CARD_CPZ_CTR_PACKET", ""},
-	{0xD0, "FREE_SLOTS_ADDR_GET", ""},
-	{0xD1, "DN_START_PARENT_GET", ""},
-	{0xD2, "DN_START_PARENT_SET", ""},
-	{0xD3, "MEMORYMGMT_LEAVE", ""},
-	{0xD4, "USER_CHANGE_NB_SET", ""},
-	{0xD5, "DESCRIPTION_GET", ""},
-	{0xD6, "USER_CHANGE_NB_GET", ""},
-	{0xD7, "FREE_NB_USR_SLT_GET", ""},
-	{0xD8, "DESCRIPTION_SET", ""},
-	{0xD9, "DEVICE_LOCK", ""},
-	{0xDA, "MINI_SERIAL_GET", ""},
-	{0xDB, "UNLOCK_WITH_PIN", ""},
+	{
+		.id = 0xA0,
+		.name = "DEBUG_MSG",
+		.description = "Debug message sent by mooltipass",
+		.request = "This command should not be sent by user",
+		.response = "Contains a string with the message"
+	},{
+		.id = 0xA1,
+		.name = "PING",
+		.description = "Send a 4 bytes payload to mooltipass and it will echo it back",
+		.request = "4 bytes payload",
+		.response = "The same packet as the one received"
+	},{
+		.id = 0xA2,
+		.name = "VERSION_GET",
+		.description = "Retrieve mooltipass firmware version",
+		.request = "Empty",
+		.response = "The first byte contains the FLASH_CHIP define which specifies how much memory the Mooltipass has. The rest is a string identifying the version in the vX.X format. The Mooltipass Mini has '_mini' appended to the version string."
+	},{
+		.id = 0xA3,
+		.name = "CONTEXT_SET",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xA4,
+		.name = "LOGIN_GET",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xA5,
+		.name = "PASSWORD_GET",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xA6,
+		.name = "LOGIN_SET",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xA7,
+		.name = "PASSWORD_SET",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xA8,
+		.name = "CHECK_PASSWORD",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xA9,
+		.name = "CONTEXT_ADD",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xAA,
+		.name = "BOOTLOADER_PWD_SET",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xAB,
+		.name = "JUMP_TO_BOOTLOADER",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xAC,
+		.name = "RANDOM_NUMBER_GET",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xAD,
+		.name = "MEMORYMGMT_ENTER",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xAE,
+		.name = "IMPORT_MEDIA_START",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xAF,
+		.name = "IMPORT_MEDIA",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xB0,
+		.name = "IMPORT_MEDIA_END",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xB1,
+		.name = "MOOLTIPASS_PARM_SET",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xB2,
+		.name = "MOOLTIPASS_PARM_GET",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xB3,
+		.name = "CARD_RESET",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xB4,
+		.name = "READ_CARD_CREDS",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xB5,
+		.name = "RESERVED",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xB6,
+		.name = "CARD_LOGIN_SET",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xB7,
+		.name = "CARD_PASS_SET",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xB8,
+		.name = "UNKNOWN_CARD_ADD",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xB9,
+		.name = "STATUS_GET",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xBA,
+		.name = "FUNCTIONAL_TEST_RES",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xBB,
+		.name = "DATE_SET",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xBC,
+		.name = "UID_SET",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xBD,
+		.name = "UID_GET",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xBE,
+		.name = "DATA_SERVICE_SET",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xBF,
+		.name = "DATA_SERVICE_ADD",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xC0,
+		.name = "WRITE_32B_IN_DN",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xC1,
+		.name = "READ_32B_IN_DN",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xC2,
+		.name = "CUR_CARD_CPZ_GET",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xC3,
+		.name = "REQUEST_CANCEL",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xC4,
+		.name = "PLEASE_RETRY",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xC5,
+		.name = "FLASH_NODE_READ",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xC6,
+		.name = "FLASH_NODE_WRITE",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xC7,
+		.name = "FAVORITE_GET",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xC8,
+		.name = "FAVORITE_SET",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xC9,
+		.name = "STARTING_PARENT_GET",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xCA,
+		.name = "STARTING_PARENT_SET",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xCB,
+		.name = "CTRVALUE_GET",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xCC,
+		.name = "CTRVALUE_SET",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xCD,
+		.name = "CARD_CPZ_CTR_ADD",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xCE,
+		.name = "CARD_CPZ_CTR_GET",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xCF,
+		.name = "CARD_CPZ_CTR_PACKET",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xD0,
+		.name = "FREE_SLOTS_ADDR_GET",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xD1,
+		.name = "DN_START_PARENT_GET",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xD2,
+		.name = "DN_START_PARENT_SET",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xD3,
+		.name = "MEMORYMGMT_LEAVE",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xD4,
+		.name = "USER_CHANGE_NB_SET",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xD5,
+		.name = "DESCRIPTION_GET",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xD6,
+		.name = "USER_CHANGE_NB_GET",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xD7,
+		.name = "FREE_NB_USR_SLT_GET",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xD8,
+		.name = "DESCRIPTION_SET",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xD9,
+		.name = "DEVICE_LOCK",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xDA,
+		.name = "MINI_SERIAL_GET",
+		.description = "",
+		.request = "",
+		.response = ""
+	},{
+		.id = 0xDB,
+		.name = "UNLOCK_WITH_PIN",
+		.description = "",
+		.request = "",
+		.response = ""
+	}
 };
 
 const size_t uma_command_original_size = sizeof(uma_command_original) / sizeof(uma_command_info);
