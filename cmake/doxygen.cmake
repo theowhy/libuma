@@ -17,7 +17,7 @@ if(NOT DOXYGEN_GENERIC_DOXYFILE)
 	mark_as_advanced(DOXYGEN_GENERIC_DOXYFILE)
 endif()
 
-if(NOT TARGET doc)
+if(NOT TARGET doc AND DOXYGEN_FOUND)
 	add_custom_target(doc COMMENT "Generating documentation")
 endif()
 
