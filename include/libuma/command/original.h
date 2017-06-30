@@ -9,6 +9,12 @@
 extern "C" {
 #endif
 
+/*!
+ * \brief Command IDs enumeration
+ *
+ * Enumeration that can be used when sending commands.
+ * \see uma_command_original for a description of the commands
+ */
 enum UMA_COMMAND_ORIGINAL {
 	PING = 0xA1,
 	GET_VERSION = 0xA2,
@@ -71,8 +77,18 @@ enum UMA_COMMAND_ORIGINAL {
 	UNLOCK_WITH_PIN = 0xDB,
 };
 
+/*!
+ * \brief Supported commands array
+ *
+ * This array contains the descriptions for every commands supported by the mooltipass device original firmware
+ */
 extern uma_command_info uma_command_original[];
 
+/*!
+ * \brief Number of commands in original mooltipass firmware
+ *
+ * This count is also the exact number of entries in the \ref uma_command_original array
+ */
 extern const size_t uma_command_original_size;
 
 #ifdef __cplusplus
