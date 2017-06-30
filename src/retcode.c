@@ -18,7 +18,7 @@ struct rc_module {
 
 static struct rc_info generic_rc[] = {
 	{UMA_SUCCESS, "SUCCESS", "Everything went as excepted", ""},
-	{UMA_ERROR_BAD_ARGS, "ERROR_BAD_ARGS", "Bad args", "This error is a programming error. Build the software in Debug and look for assertions"},
+	{UMA_ERROR_BAD_ARGS, "ERROR_BAD_ARGS", "Bad arguments were given to API call", "This error is a most likely an error in API usage. Build the software in Debug and look for assertions"},
 	{0}
 };
 
