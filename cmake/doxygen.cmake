@@ -50,7 +50,7 @@ function(add_documentation TARGET)
 
 		# Define version
 		if(ARG_PROJECT_VERSION)
-			set(DOXYGEN_PROJECT_VERSION ${PROJECT_VERSION})
+			set(DOXYGEN_PROJECT_VERSION ${ARG_PROJECT_VERSION})
 		else()
 			set(DOXYGEN_PROJECT_VERSION ${PROJECT_VERSION})
 		endif()
