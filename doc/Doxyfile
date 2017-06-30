@@ -199,8 +199,8 @@ HTML_INDEX_NUM_ENTRIES = 100
 #---------------------------------------------------
 GENERATE_DOCSET        = YES
 DOCSET_FEEDNAME        = "Doxygen generated docs"
-DOCSET_BUNDLE_ID       = org.doxygen.Project
-DOCSET_PUBLISHER_ID    = org.doxygen.Publisher
+DOCSET_BUNDLE_ID       = @DOXYGEN_PUBLISHER_ID@
+DOCSET_PUBLISHER_ID    = @DOXYGEN_PUBLISHER_NAME@
 DOCSET_PUBLISHER_NAME  = Publisher
 
 # Configuration options related to the CHM help output
@@ -219,8 +219,8 @@ TOC_EXPAND             = NO
 # Configuration options related to the QHP help output
 #------------------------------------------------------
 GENERATE_QHP           = NO
-QCH_FILE               =
-QHP_NAMESPACE          = org.doxygen.Project
+QCH_FILE               = @DOXYGEN_PROJECT_NAME@.qch
+QHP_NAMESPACE          = @DOXYGEN_PROJECT_NAME@
 QHP_VIRTUAL_FOLDER     = doc
 QHP_CUST_FILTER_NAME   =
 QHP_CUST_FILTER_ATTRS  =
@@ -228,7 +228,7 @@ QHP_SECT_FILTER_ATTRS  =
 
 QHG_LOCATION           =
 GENERATE_ECLIPSEHELP   = NO
-ECLIPSE_DOC_ID         = org.doxygen.Project
+ECLIPSE_DOC_ID         = @DOXYGEN_PROJECT_NAME@
 DISABLE_INDEX          = NO
 
 GENERATE_TREEVIEW      = NO

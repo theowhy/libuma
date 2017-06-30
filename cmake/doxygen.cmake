@@ -25,7 +25,10 @@ function(add_documentation TARGET)
 	set(options)
 	set(oneValueArgs
 		DOXYFILE #Doxygen doxyfile
+		PRODUCT_ID # Product id to set for some documentation formats. Default: ${PROJECT_NAME}
 		PROJECT_NAME # Set project name for documentation. Default: ${PROJECT_NAME}
+		PUBLISHER_NAME # Set project name for documentation. Default: ""
+		PUBLISHER_ID # Set project name for documentation. Default: ""
 		PROJECT_VERSION # Set the documented project's version. Default: ${PROJECT_VERSION}
 		MAIN_PAGE # Set project documentation main page
 	)
@@ -54,6 +57,23 @@ function(add_documentation TARGET)
 		else()
 			set(DOXYGEN_PROJECT_VERSION ${PROJECT_VERSION})
 		endif()
+
+		# Define product ID
+		if(ARG_PRODUCT_ID)
+			set(DOXYGEN_PRODUCT_ID ${ARG_PRODUCT_ID})
+		else()
+			set(DOXYGEN_PRODUCT_ID ${PROJECT_NAME})
+		endif()
+
+		# Define publisher ID
+		if(ARG_PUBLISHER_ID)
+			set(DOXYGEN_PUBLISHER_ID ${ARG_PUBLISHER_ID})
+		endif()
+
+		# Define publisher name
+		if(ARG_PUBLISHER_NAME)
+			set(DOXYGEN_PUBLISHER_NAME ${ARG_PUBLISHER_NAME})
+ 		endif()
 
 		if(ARG_MAIN_PAGE)
 			set(DOXYGEN_MAIN_PAGE ${ARG_MAIN_PAGE})
