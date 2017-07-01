@@ -1,6 +1,7 @@
 #include <libuma/command/type.h>
 #include <libuma/command/utils.h>
 #include <libuma/command/original.h>
+#include <libuma/retcode.h>
 #include <stdint.h>
 #include <string.h>
 #include <assert.h>
@@ -11,10 +12,10 @@ int moopass_command_name_get(char const ** name, uint8_t command_id) {
 		if(uma_command_original[i].id == command_id) {
 			(*name) = uma_command_original[i].name;
 
-			return 0;
+			return UMA_FOUND;
 		}
 	}
-	return 1;
+	return UMA_NOT_FOUND;
 }
 
 int moopass_command_id_get_from_name(char const * const name, uint8_t *command_id) {
