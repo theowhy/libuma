@@ -11,6 +11,10 @@ enum uma_ret_code {
 	UMA_SUCCESS = 0,
 	UMA_ERROR_BAD_ARGS,
 
+	// Generic found/not found
+	UMA_FOUND = 1,
+	UMA_NOT_FOUND = 0,
+
 	// USB errors
 	UMA_ERROR_USB_INIT = 0x00010000,
 
