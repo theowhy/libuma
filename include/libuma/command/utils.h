@@ -15,12 +15,10 @@ extern "C" {
  *
  * In the given commands array of command_count elements, a command with raw_command_id is searched.
  *
- * \param commands Array containing the commands to look into
- * \param command_count The number of commands in the commands array
- * \param raw_command_id The ID of the command to look for
+ * \param[out] name name of the command
+ * \param[in] command_id The ID of the command to look for
  *
- * \return  The name (see name field of \ref uma_command_info structure) if the command is found.\n
- * Otherwise, NULL is returned
+ * \return  UMA_FOUND if the command is found or UMA_NOT_FOUND otherwhise.
  */
 int moopass_command_name_get(char const ** name, uint8_t command_id);
 
