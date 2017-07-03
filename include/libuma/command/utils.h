@@ -30,6 +30,15 @@ int moopass_command_name_get(char const ** name, uint8_t command_id);
 int moopass_command_id_get_from_name(char const * const name, uint8_t *command_id);
 int moopass_command_get_from_id(uint8_t command_id, uma_command_info **command_info);
 int moopass_command_get_from_name(char const * const name, uma_command_info **command_info);
+
+/*!
+ * \brief Pretty print a list of command
+ *
+ * \param[out] output File stream to print into
+ * \param[in] level Indentation level
+ * \param[in] request_response_print Boolean that indicates if the requests and responses should be printed with the command
+ * \param[in] prefix String to use in order to prefix each command
+ */
 void command_list_print(FILE *output, size_t level, bool request_response_print, char const *prefix);
 
 #ifdef __cplusplus
